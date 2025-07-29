@@ -120,7 +120,7 @@
   transform: rotate(90deg);
 }
 
-/* Responsive adjustments */
+
 @media (max-width: 991.98px) {
   .navbar-collapse {
     background: rgba(15, 15, 15, 0.98);
@@ -148,7 +148,7 @@
   }
 }
 
-/* Scroll behavior for navbar */
+
 .navbar.scrolled {
   height: 60px;
   background: rgba(10, 10, 10, 0.98) !important;
@@ -178,12 +178,12 @@ body {
   overflow-x: hidden;
 }
 
-/* Smooth scroll behavior */
+
 html {
   scroll-behavior: smooth;
 }
 
-/* Typography */
+
 h1,
 h2,
 h3,
@@ -223,14 +223,14 @@ h2::after {
   border-radius: 3px;
 }
 
-/* Layout */
+
 .content {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
 }
 
-/* Hero Section */
+
 .home-section {
   min-height: 40vh;
   display: flex;
@@ -272,7 +272,7 @@ h2::after {
   }
 }
 
-/* Hero Section */
+
 .hero {
   padding: 1rem 0;
   position: relative;
@@ -345,7 +345,7 @@ h2::after {
   }
 }
 
-/* Video Container */
+
 .video-container {
   margin: 3rem 0;
   opacity: 0;
@@ -367,7 +367,7 @@ h2::after {
 
 
 
-/* Services Section */
+
 .service-section {
   display: flex;
   align-items: center;
@@ -450,7 +450,7 @@ h2::after {
   margin: 0;
 }
 
-/* Scroll Animation Trigger */
+
 .animate-on-scroll {
   opacity: 0;
   transition: opacity 0.6s ease-out, transform 0.6s ease-out;
@@ -461,7 +461,7 @@ h2::after {
   transform: translateY(0);
 }
 
-/* Responsive Design */
+
 @media (max-width: 768px) {
   .service-section {
     flex-direction: column;
@@ -482,7 +482,7 @@ h2::after {
   }
 }
 
-/* Scrollbar styling */
+
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -500,7 +500,7 @@ h2::after {
   background: var(--accent-hover);
 }
 
-/* Link hover effects */
+
 a {
   color: var(--accent-color);
   text-decoration: none;
@@ -512,7 +512,7 @@ a:hover {
   text-decoration: underline;
 }
 
-/* Button styles (if you add buttons later) */
+
 .btn {
   display: inline-block;
   background-color: var(--accent-color);
@@ -534,7 +534,7 @@ a:hover {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* ===== Dark Theme Footer Styling ===== */
+
 .footer {
   background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 100%);
   color: #b0b0b0;
@@ -655,7 +655,7 @@ a:hover {
   color: #5a7dff;
 }
 
-/* Animation when footer comes into view */
+
 .footer.animate-on-scroll {
   opacity: 0;
   transform: translateY(30px);
@@ -668,7 +668,7 @@ a:hover {
   transform: translateY(0);
 }
 
-/* Responsive adjustments */
+
 @media (max-width: 768px) {
   .footer {
     padding: 2.5rem 1rem;
@@ -688,7 +688,7 @@ a:hover {
   }
 }
 
-/* Glow effect for interactive elements */
+
 .footer-link,
 .footer-phone,
 .footer-email {
@@ -718,7 +718,7 @@ a:hover {
   opacity: 1;
 }
 
-/* Copyright text (optional - add inside footer-content if needed) */
+
 .footer-copyright {
   margin-top: 2rem;
   font-size: 0.875rem;
@@ -781,7 +781,7 @@ a:hover {
 }
 
 
-/* Optional: Styling inside video tag (in case inline styles removed) */
+
 .video-container video {
   border-radius: 15px;
   width: 100%;
@@ -792,7 +792,6 @@ a:hover {
 
 
 
-/* Why Us Section */
 .why-us {
   
   padding: 0px 30px;
@@ -814,7 +813,7 @@ a:hover {
   
 }
 
-/* Horizontal Card Row */
+
 .card-row {
   display: flex;
   flex-wrap: wrap;
@@ -822,7 +821,8 @@ a:hover {
   gap: 20px;
 }
 
-/* Individual Card */
+
+
 .why-card {
   
   border: 1px solid #333;
@@ -856,7 +856,6 @@ a:hover {
 }
 
 
-/* Card Content */
 .why-card h3 {
   font-size: 1.3rem;
 color: #456cfb;
@@ -883,7 +882,8 @@ color: #456cfb;
   color: #3d3c3c;
 }
 
-/* Animate on Scroll */
+
+
 .animate-on-scroll {
   opacity: 0;
   transform: translateY(40px);

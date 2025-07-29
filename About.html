@@ -42,7 +42,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <!-- Collapse section centered only on lg and larger -->
+      
       <div class="collapse navbar-collapse justify-content-lg-center" id="navbarNavDropdown">
         <ul class="navbar-nav">
   <li class="nav-item">
@@ -314,10 +314,10 @@ document.addEventListener("DOMContentLoaded", function() {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('animate');
-        observer.unobserve(entry.target); // Animate only once
+        observer.unobserve(entry.target); 
       }
     });
-  }, { threshold: 0.12 }); // Adjust threshold as needed
+  }, { threshold: 0.12 }); 
 
   document.querySelectorAll('.animate-on-scroll').forEach(element => {
     observer.observe(element);
