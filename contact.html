@@ -72,7 +72,7 @@
               <li><a class="dropdown-item" href="http://voice.onecallsolutions.in/" target="_blank">Bulk Voice Call </a></li>
               <li><a class="dropdown-item" href="http://wm.onecallsolutions.in/" target="_blank">Bulk Whatsapp</a></li>
               <li><a class="dropdown-item" href="http://bwa.onecallsolutions.in/" target="_blank">Business WhatsApp API</a></li>
-              <li><a class="dropdown-item" href="http://onecallsolutions.in/" target="_blank">SMS</a></li>
+              <li><a class="dropdown-item" href="https://sms.onecallsolutions.in/" target="_blank">SMS</a></li>
             </ul>
           </li>
         </ul>
@@ -80,12 +80,12 @@
     </div>
   </nav>
 
- <section id="contact">
+<section id="contact">
   <div class="container mt-3 pt-3">
     <h2>Contact Us</h2>
-    <form id="contactForm" onsubmit="sendEmail(); return false;">
+    <form id="contactForm" onsubmit="sendEmail(event)">
       <div class="form-group">
-      <input type="text" placeholder=" " id="name" name="name" required />
+        <input type="text" placeholder=" " id="name" name="name" required />
         <label for="name">Your Name</label>
       </div>
 
@@ -95,7 +95,15 @@
       </div>
 
       <div class="form-group">
-        <input type="tel" placeholder=" " id="phone" name="phone" required />
+        <input type="tel" 
+               placeholder=" " 
+               id="phone" 
+               name="phone" 
+               required 
+               pattern="\d{10}" 
+               maxlength="10" 
+               minlength="10" 
+               title="Phone number must be exactly 10 digits" />
         <label for="phone">Phone Number</label>
       </div>
 
@@ -117,7 +125,7 @@
   <div class="footer-content">
     <p class="footer-address">
       One Call Solutions, II Floor, Plot No223,<br />
-      Opp. Vijaya Bank, Zone-2, MP Nagar, Bhopal-11
+      Opp. India Bank, Zone-II, MP Nagar, Bhopal-11
     </p>
     <p class="footer-email">
       Email – <a href="mailto:onecallsolutions@mail.com">onecallsolutions@mail.com</a>
@@ -138,11 +146,9 @@
 </footer>
 
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
 
-    </script>
-
-    <script>
+<script>
 document.addEventListener("DOMContentLoaded", function() {
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -198,18 +204,24 @@ document.querySelectorAll('.animate-on-scroll').forEach(el => {
 
 
 
+
+
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <script>
   (function () {
-    emailjs.init("frHXWWoThW3fXB2LP"); // Replace with your actual EmailJS Public Key
+    emailjs.init("AdzdjQ8_16IJENrxG"); // Replace with your actual EmailJS Public Key
   })();
 
-  function sendEmail() {
-    emailjs.sendForm("service_r44dui9", "template_6x4z0qt", "#contactForm")
+  function sendEmail(event) {
+    event.preventDefault(); // Prevent form from submitting the traditional way
+
+    emailjs.sendForm("service_p3ixm6k", "template_kt1xpni", "#contactForm")
       .then(function () {
         document.getElementById("responseMessage").innerText = "✅ Message sent successfully!";
         document.getElementById("responseMessage").style.color = "lightgreen";
-        document.getElementById("contactForm").reset();
+        setTimeout(() => {
+          location.reload(); // Refresh the page after 2 seconds
+        }, 2000);
       }, function (error) {
         console.error("EmailJS Error:", error);
         document.getElementById("responseMessage").innerText = "❌ Failed to send. Please try again.";
@@ -220,9 +232,6 @@ document.querySelectorAll('.animate-on-scroll').forEach(el => {
 
 
 
-
-
-    
     
 </body>
 </html>
