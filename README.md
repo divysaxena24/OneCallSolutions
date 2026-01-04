@@ -32,7 +32,6 @@
 ## 🌐 Live Preview
 
 🔗 GitHub Pages: [https://divysaxena24.github.io/OneCallSolutions/](https://divysaxena24.github.io/OneCallSolutions/)  
-🌍 Custom Domain: [https://onecallsolutions.in](https://onecallsolutions.in)
 
 ---
 
