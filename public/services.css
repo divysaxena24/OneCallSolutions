@@ -505,6 +505,17 @@ a:hover {
   opacity: 0.6;
 }
 
+.footer-legal-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 .footer {
   opacity: 1 !important;
   transform: none !important;

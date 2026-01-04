@@ -486,6 +486,17 @@ a:hover {
   opacity: 0.6;
 }
 
+.footer-legal-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 .footer {
   opacity: 1 !important;
   transform: none !important;
@@ -613,4 +624,46 @@ a:hover{
   font-family: 'Poppins', sans-serif;
   font-size: 0.95rem;
   color: #4ade80; /* soft green for success */
+}
+
+/* Form validation styles */
+.form-group .invalid-feedback {
+  display: none;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  color: #dc3545;
+  font-weight: 500;
+}
+
+.form-group input.is-invalid,
+.form-group textarea.is-invalid {
+  border-color: #dc3545 !important;
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.15) !important;
+}
+
+.form-group input.is-invalid:focus,
+.form-group textarea.is-invalid:focus {
+  border-color: #dc3545 !important;
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25) !important;
+}
+
+.form-check.is-invalid .form-check-label {
+  color: #dc3545;
+}
+
+.form-check.is-invalid .invalid-feedback {
+  display: block;
+}
+
+.form-group input.is-invalid ~ label,
+.form-group textarea.is-invalid ~ label {
+  color: #dc3545 !important;
+}
+
+/* Override any default bootstrap validation */
+.form-control.is-valid,
+.form-control.is-invalid {
+  background-image: none !important;
+  padding-right: 0.75rem !important;
 }
