@@ -57,15 +57,17 @@
     <h2>Contact Us</h2>
 
     <form id="contactForm" novalidate>
+      <input type="hidden" name="title" value="Contact Inquiry" />
+      <input type="hidden" name="time" id="hiddenTime" />
       <div class="form-group">
-        <input type="text" id="name" required pattern="[A-Za-z\s]{2,50}" />
+        <input type="text" id="name" name="name" required pattern="[A-Za-z\s]{2,50}" />
         <label>Your Name</label>
         <div class="invalid-feedback">Please enter a valid name</div>
       </div>
 
       <div class="form-group d-flex align-items-end gap-2 flex-wrap">
         <div style="flex: 4; min-width: 200px;">
-          <input type="email" id="email" required />
+          <input type="email" id="email" name="email" required />
           <label>Your Email</label>
           <div class="invalid-feedback">Please enter a valid email address</div>
         </div>
@@ -84,13 +86,13 @@
       </div>
 
       <div class="form-group">
-        <input type="tel" id="phone" required pattern="[0-9]{10}" maxlength="10" />
+        <input type="tel" id="phone" name="phone" required pattern="[0-9]{10}" maxlength="10" />
         <label>Phone Number</label>
         <div class="invalid-feedback">Enter 10-digit phone number</div>
       </div>
 
       <div class="form-group">
-        <textarea id="message" required minlength="10"></textarea>
+        <textarea id="message" name="message" required minlength="10"></textarea>
         <label>Your Message</label>
         <div class="invalid-feedback">Message must be 10+ characters</div>
       </div>
@@ -144,6 +146,9 @@ document.getElementById("sendOtpBtn").addEventListener("click", async function()
         website_link: window.location.origin
     };
 
+    // Also update hidden field for the contact form template
+    document.getElementById("hiddenTime").value = new Date().toLocaleString();
+
     try {
         // Direct call with Public Key for maximum reliability
         await emailjs.send("service_p3ixm6k", "template_8whtdh9", templateParams, "AdzdjQ8_16IJENrxG");
@@ -170,9 +175,9 @@ document.getElementById("verifyOtpBtn").addEventListener("click", function() {
         isEmailVerified = true;
         otpMsg.innerText = "Email verified successfully! ✅";
         otpMsg.style.color = "lightgreen";
-        document.getElementById("otp").disabled = true;
+        document.getElementById("otp").readOnly = true;
         this.disabled = true;
-        document.getElementById("email").disabled = true;
+        document.getElementById("email").readOnly = true;
         document.getElementById("sendOtpBtn").disabled = true;
         document.getElementById("submitBtn").disabled = false;
     } else {
@@ -200,7 +205,16 @@ document.getElementById("contactForm").addEventListener("submit", function (e) {
   submitBtn.disabled = true;
   submitBtn.innerText = "Sending...";
 
-  emailjs.sendForm("service_p3ixm6k", "template_kt1xpni", "#contactForm")
+  const templateParams = {
+    name: document.getElementById("name").value.trim(),
+    email: document.getElementById("email").value.trim(),
+    phone: document.getElementById("phone").value.trim(),
+    message: document.getElementById("message").value.trim(),
+    title: "Contact Inquiry",
+    time: document.getElementById("hiddenTime").value
+  };
+
+  emailjs.send("service_p3ixm6k", "template_kt1xpni", templateParams)
     .then(() => {
       document.getElementById("responseMessage").innerText = "✅ Message sent successfully!";
       document.getElementById("responseMessage").style.color = "lightgreen";
@@ -232,7 +246,8 @@ function validateField(id) {
 
 function validateEmail() {
   const email = document.getElementById("email");
-  const error = email.parentNode.nextElementSibling.nextElementSibling; // Adjust because of new wrapper
+  // Find invalid-feedback in the same parent container
+  const error = email.closest('.form-group').querySelector('.invalid-feedback');
   const emailValue = email.value.trim();
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
