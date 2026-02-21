@@ -3,35 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>One Call Solutions</title>
-
-  <link rel="icon" type="image/png" href="source/logo.png" />
-
-
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" />
-
-
-
-  <script src="/script.js"></script>
-
-  <!-- Google Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
-
-<!-- Font Awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-  <link rel="stylesheet" href="public/contact.css" />
-  <script src="script.js"></script>
- 
-
+    <title>One Call Solutions - Contact Us</title>
+    <link rel="icon" type="image/png" href="source/logo.png" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="public/contact.css" />
+    <style>
+      .is-invalid { border: 2px solid #dc3545 !important; }
+      h1 { font-size: clamp(2rem, 8vw, 3rem); font-weight: 700; background: linear-gradient(90deg, #4a6bff, #00d4ff); -webkit-background-clip: text; background-clip: text; color: transparent; }
+      h2 { font-size: clamp(1.5rem, 5vw, 2.2rem); }
+    </style>
 </head>
-<body>
+<body class="starfield">
 
-<nav class="navbar navbar-expand-lg custom-navbar-dark fixed-top shadow-lg">
-
+  <nav class="navbar navbar-expand-lg custom-navbar-dark fixed-top shadow-lg">
     <div class="container-fluid">
       <a class="navbar-brand" href="index.html"> <img
             src="source\navLogo.png"
@@ -43,26 +28,13 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <!-- Collapse section centered only on lg and larger -->
       <div class="collapse navbar-collapse justify-content-lg-center" id="navbarNavDropdown">
         <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link " aria-current="page" href="index.html">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="About.html">About Us</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="services.html">Services</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="clients.html">Our Clients</a>
-          </li>
-
-          <li class="nav-item ">
-            <a class="nav-link active" href="#">Contact Us</a>
-          </li>
-
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="About.html">About Us</a></li>
+          <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="clients.html">Our Clients</a></li>
+          <li class="nav-item"><a class="nav-link active" href="#">Contact Us</a></li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <button class="btn btn-primary mx-3 btn-sm" style="font-size: 15px; padding: 4px 8px;">Log-in</button>
@@ -73,87 +45,6 @@
               <li><a class="dropdown-item" href="http://wm.onecallsolutions.in/" target="_blank">Bulk Whatsapp</a></li>
               <li><a class="dropdown-item" href="http://bwa.onecallsolutions.in/" target="_blank">Business WhatsApp API</a></li>
               <li><a class="dropdown-item" href="http://sms.onecallsolutions.in/" target="_blank">SMS</a></li>
-            
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>One Call Solutions</title>
-
-  <link rel="icon" href="source/logo.png" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" />
-
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet" />
-
-  <link rel="stylesheet" href="public/contact.css" />
-
-  <style>
-    .is-invalid {
-      border: 2px solid #dc3545 !important;
-      box-shadow: 0 0 0 0.15rem rgba(220, 53, 69, 0.25);
-    }
-    .invalid-feedback {
-      display: none;
-      color: #dc3545;
-      font-size: 13px;
-    }
-  </style>
-</head>
-
-<body>
-
-   <nav class="navbar navbar-expand-lg custom-navbar-dark fixed-top shadow-lg">
-
-    <div class="container-fluid">
-      <a class="navbar-brand" href="index.html">  <img
-            src="source\navLogo.png"
-            alt="Logo"
-            style="height: 70px; width:90px; border-radius: 0.5rem"
-          /> </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      
-      
-      <div class="collapse navbar-collapse justify-content-lg-center" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link " aria-current="page" href="index.html">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="index.html">About Us</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="services.html">Services</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link " href="clients.html">Our Clients</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link active" href="#">Contact Us</a>
-          </li>
-
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <button class="btn btn-primary mx-3 btn-sm" style="font-size: 15px; padding: 4px 8px;">Log-in</button>
-            </a>
-           <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="http://vcc.onecallsolutions.in/" target="_blank">IVRS</a></li>
-              <li><a class="dropdown-item" href="http://voice.onecallsolutions.in/" target="_blank">Bulk Voice Call </a></li>
-              <li><a class="dropdown-item" href="http://wm.onecallsolutions.in/" target="_blank">Bulk Whatsapp</a></li>
-              <li><a class="dropdown-item" href="http://bwa.onecallsolutions.in/" target="_blank">Business WhatsApp API</a></li>
-              <li><a class="dropdown-item" href="http://sms.onecallsolutions.in/" target="_blank">SMS</a></li>
-               
             </ul>
           </li>
         </ul>
@@ -172,24 +63,24 @@
         <div class="invalid-feedback">Please enter a valid name</div>
       </div>
 
-      <div class="form-group d-flex align-items-end gap-2">
-        <div style="flex: 4;">
+      <div class="form-group d-flex align-items-end gap-2 flex-wrap">
+        <div style="flex: 4; min-width: 200px;">
           <input type="email" id="email" required />
           <label>Your Email</label>
+          <div class="invalid-feedback">Please enter a valid email address</div>
         </div>
         <button type="button" id="sendOtpBtn" class="btn btn-outline-primary mb-2" style="border-radius: 8px; padding: 10px 8px; flex: 1; font-size: 0.85rem; min-width: 90px;">Send OTP</button>
-        <div class="invalid-feedback">Please enter a real email</div>
       </div>
 
       <div id="otpSection" style="display: none;">
-        <div class="form-group d-flex align-items-end gap-2">
-          <div style="flex: 4;">
+        <div class="form-group d-flex align-items-end gap-2 flex-wrap">
+          <div style="flex: 4; min-width: 150px;">
             <input type="text" id="otp" placeholder="Enter 6-digit OTP" maxlength="6" />
             <label>Verification Code</label>
+            <div id="otpMessage" style="font-size: 14px; margin-top: 5px;"></div>
           </div>
           <button type="button" id="verifyOtpBtn" class="btn btn-primary mb-2" style="border-radius: 8px; padding: 10px 8px; flex: 1; font-size: 0.85rem; min-width: 80px;">Verify</button>
         </div>
-        <p id="otpMessage" style="font-size: 14px; margin-top: -10px;"></p>
       </div>
 
       <div class="form-group">
@@ -249,6 +140,7 @@ document.getElementById("sendOtpBtn").addEventListener("click", async function()
         passcode: generatedOtp,
         time: expiryTime,
         company_name: "One Call Solutions",
+        logo_url: window.location.origin + "/source/navLogo.png",
         website_link: window.location.origin
     };
 
@@ -377,7 +269,7 @@ function clearErrors() {
 
 
 <footer class="footer animate-on-scroll">
-  <div class="footer-content">
+  <div class="footer-content text-center">
     <p class="footer-address">
       One Call Solutions, II Floor, Plot No223,<br />
       Opp. Indian Bank, Zone-II, MP Nagar, Bhopal-11
@@ -405,12 +297,10 @@ function clearErrors() {
   </div>
 </footer>
 
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-  // Single Intersection Observer for all scroll animations
   const scrollObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {

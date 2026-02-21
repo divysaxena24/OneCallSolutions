@@ -165,7 +165,7 @@
 
 
 <footer class="footer animate-on-scroll">
-  <div class="footer-content">
+  <div class="footer-content text-center">
     <p class="footer-address">
       One Call Solutions, II Floor, Plot No223,<br />
       Opp. Indian Bank, Zone-II, MP Nagar, Bhopal-11
@@ -200,70 +200,22 @@
       
     </script>
 
-    <script>
+<script>
 document.addEventListener("DOMContentLoaded", function() {
-  const observer = new IntersectionObserver(entries => {
+  const scrollObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('animate');
-        observer.unobserve(entry.target); // Animate only once
+        entry.target.classList.add('animate', 'visible', 'active');
       }
     });
-  }, { threshold: 0.12 }); // Adjust threshold as needed
-
-  document.querySelectorAll('.animate-on-scroll').forEach(element => {
-    observer.observe(element);
+  }, { 
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
   });
-});
-</script>
 
-
-
-<script>
-// Intersection Observer for scroll animations
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('active');
-      // Optional: Unobserve after animation triggers
-      // observer.unobserve(entry.target);
-    }
+  document.querySelectorAll('.animate-on-scroll').forEach(el => {
+    scrollObserver.observe(el);
   });
-}, {
-  threshold: 0.1,
-  rootMargin: '0px 0px -50px 0px'
-});
-
-// Observe all elements with animate-on-scroll class
-document.querySelectorAll('.animate-on-scroll').forEach(el => {
-  observer.observe(el);
-});
-
-// Optional: Animate hero elements sequentially
-const heroElements = document.querySelectorAll('.hero-content, .video-container');
-heroElements.forEach((el, index) => {
-  el.style.animationDelay = `${index * 0.3}s`;
-});
-</script>
-
-
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-  const animateOnScroll = () => {
-    const elements = document.querySelectorAll('.animate-on-scroll');
-    
-    elements.forEach(element => {
-      const elementPosition = element.getBoundingClientRect().top;
-      const windowHeight = window.innerHeight;
-      
-      if (elementPosition < windowHeight - 100) {
-        element.classList.add('active');
-      }
-    });
-  };
-  
-  window.addEventListener('scroll', animateOnScroll);
-  animateOnScroll(); // Run once on load
 });
 </script>
 
