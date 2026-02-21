@@ -172,10 +172,24 @@
         <div class="invalid-feedback">Please enter a valid name</div>
       </div>
 
-      <div class="form-group">
-        <input type="email" id="email" required />
-        <label>Your Email</label>
+      <div class="form-group d-flex align-items-end gap-2">
+        <div style="flex: 4;">
+          <input type="email" id="email" required />
+          <label>Your Email</label>
+        </div>
+        <button type="button" id="sendOtpBtn" class="btn btn-outline-primary mb-2" style="border-radius: 8px; padding: 10px 8px; flex: 1; font-size: 0.85rem; min-width: 90px;">Send OTP</button>
         <div class="invalid-feedback">Please enter a real email</div>
+      </div>
+
+      <div id="otpSection" style="display: none;">
+        <div class="form-group d-flex align-items-end gap-2">
+          <div style="flex: 4;">
+            <input type="text" id="otp" placeholder="Enter 6-digit OTP" maxlength="6" />
+            <label>Verification Code</label>
+          </div>
+          <button type="button" id="verifyOtpBtn" class="btn btn-primary mb-2" style="border-radius: 8px; padding: 10px 8px; flex: 1; font-size: 0.85rem; min-width: 80px;">Verify</button>
+        </div>
+        <p id="otpMessage" style="font-size: 14px; margin-top: -10px;"></p>
       </div>
 
       <div class="form-group">
@@ -199,29 +213,143 @@
         <div class="invalid-feedback">Consent is required</div>
       </div>
 
-      <button type="submit">Send Message</button>
+      <button type="submit" id="submitBtn" disabled>Send Message</button>
       <p id="responseMessage"></p>
     </form>
   </div>
 </section>
 
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
 <script>
-emailjs.init("AdzdjQ8_16IJENrxG");
+let isEmailVerified = false;
 
-document.getElementById("contactForm").addEventListener("submit", function (e) {
+document.getElementById("sendOtpBtn").addEventListener("click", async function() {
+    const email = document.getElementById("email").value.trim();
+    if (!validateEmail()) return;
+
+    const btn = this;
+    btn.disabled = true;
+    const BASE_URL = window.location.origin.includes('localhost:3000') ? '' : 'http://localhost:3000';
+
+    try {
+        const response = await fetch(`${BASE_URL}/send-otp`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email })
+        });
+        const data = await response.json();
+
+        if (data.success) {
+            document.getElementById("otpSection").style.display = "block";
+            document.getElementById("otpMessage").innerText = "OTP sent to your email!";
+            document.getElementById("otpMessage").style.color = "lightgreen";
+            btn.innerText = "Resend OTP";
+        } else {
+            alert(data.message);
+            btn.innerText = "Send OTP";
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        alert("Failed to send OTP. Is the server running?");
+        btn.innerText = "Send OTP";
+    } finally {
+        btn.disabled = false;
+    }
+});
+
+document.getElementById("verifyOtpBtn").addEventListener("click", async function() {
+    const email = document.getElementById("email").value.trim();
+    const otp = document.getElementById("otp").value.trim();
+    const otpMsg = document.getElementById("otpMessage");
+
+    if (otp.length !== 6) {
+        otpMsg.innerText = "Please enter 6-digit OTP";
+        otpMsg.style.color = "red";
+        return;
+    }
+    const BASE_URL = window.location.origin.includes('localhost:3000') ? '' : 'http://localhost:3000';
+
+    try {
+        const response = await fetch(`${BASE_URL}/verify-otp`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, otp })
+        });
+        const data = await response.json();
+
+        if (data.success) {
+            isEmailVerified = true;
+            otpMsg.innerText = "Email verified successfully! ✅";
+            otpMsg.style.color = "lightgreen";
+            document.getElementById("otpSection").style.display = "block";
+            document.getElementById("otp").disabled = true;
+            this.disabled = true;
+            document.getElementById("email").disabled = true;
+            document.getElementById("sendOtpBtn").disabled = true;
+            document.getElementById("submitBtn").disabled = false;
+        } else {
+            otpMsg.innerText = data.message + " ❌";
+            otpMsg.style.color = "red";
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        alert("Verification failed.");
+    }
+});
+
+document.getElementById("contactForm").addEventListener("submit", async function (e) {
   e.preventDefault();
+
+  if (!isEmailVerified) {
+      alert("Please verify your email first.");
+      return;
+  }
 
   clearErrors();
 
   if (!validateField("name")) return;
-  if (!validateEmail()) return;
   if (!validateField("phone")) return;
   if (!validateField("message")) return;
   if (!validateConsent()) return;
 
-  sendEmail();
+  const formData = {
+      name: document.getElementById("name").value,
+      email: document.getElementById("email").value,
+      phone: document.getElementById("phone").value,
+      message: document.getElementById("message").value
+  };
+
+  const submitBtn = document.getElementById("submitBtn");
+  submitBtn.disabled = true;
+  const BASE_URL = window.location.origin.includes('localhost:3000') ? '' : 'http://localhost:3000';
+
+  try {
+      const response = await fetch(`${BASE_URL}/submit-form`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData)
+      });
+      const data = await response.json();
+
+      if (data.success) {
+          document.getElementById("responseMessage").innerText = "✅ Message sent successfully!";
+          document.getElementById("responseMessage").style.color = "lightgreen";
+          setTimeout(() => {
+              location.reload();
+          }, 3000);
+      } else {
+          document.getElementById("responseMessage").innerText = "❌ " + data.message;
+          document.getElementById("responseMessage").style.color = "red";
+          submitBtn.disabled = false;
+          submitBtn.innerText = "Send Message";
+      }
+  } catch (error) {
+      console.error("Error:", error);
+      document.getElementById("responseMessage").innerText = "❌ Connection error.";
+      document.getElementById("responseMessage").style.color = "red";
+      submitBtn.disabled = false;
+      submitBtn.innerText = "Send Message";
+  }
 });
 
 function validateField(id) {
@@ -239,10 +367,9 @@ function validateField(id) {
 
 function validateEmail() {
   const email = document.getElementById("email");
-  const error = email.nextElementSibling.nextElementSibling;
+  const error = email.parentNode.nextElementSibling.nextElementSibling; // Adjust because of new wrapper
   const emailValue = email.value.trim();
 
-  // Basic email format validation
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(emailValue)) {
     email.classList.add("is-invalid");
@@ -251,33 +378,6 @@ function validateEmail() {
     email.focus();
     return false;
   }
-
-  // Convert to lowercase for comparison
-  const lowerEmail = emailValue.toLowerCase();
-
-  // Check for common dummy email patterns
-  const dummyPatterns = ['test', 'fake', 'dummy', 'example', 'admin'];
-  for (const pattern of dummyPatterns) {
-    if (lowerEmail.includes(pattern)) {
-      email.classList.add("is-invalid");
-      error.style.display = "block";
-      error.textContent = "Please enter a valid email address";
-      email.focus();
-      return false;
-    }
-  }
-
-  // Extract domain and check for valid TLD
-  const domain = lowerEmail.split('@')[1];
-  const validTldPattern = /\.([a-z]{2,}|[a-z]{2,}\.[a-z]{2,})$/i;
-  if (!validTldPattern.test(domain)) {
-    email.classList.add("is-invalid");
-    error.style.display = "block";
-    error.textContent = "Please enter a valid email address";
-    email.focus();
-    return false;
-  }
-
   return true;
 }
 
@@ -297,18 +397,6 @@ function validateConsent() {
 function clearErrors() {
   document.querySelectorAll(".is-invalid").forEach(el => el.classList.remove("is-invalid"));
   document.querySelectorAll(".invalid-feedback").forEach(el => el.style.display = "none");
-}
-
-function sendEmail() {
-  emailjs.sendForm("service_p3ixm6k", "template_kt1xpni", "#contactForm")
-    .then(() => {
-      document.getElementById("responseMessage").innerText = "✅ Message sent successfully!";
-      document.getElementById("responseMessage").style.color = "green";
-    })
-    .catch(() => {
-      document.getElementById("responseMessage").innerText = "❌ Failed to send message.";
-      document.getElementById("responseMessage").style.color = "red";
-    });
 }
 </script>
 
@@ -351,84 +439,22 @@ function sendEmail() {
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-  const observer = new IntersectionObserver(entries => {
+  // Single Intersection Observer for all scroll animations
+  const scrollObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('animate');
-        observer.unobserve(entry.target); // Animate only once
+        entry.target.classList.add('animate', 'visible', 'active');
       }
     });
-  }, { threshold: 0.12 }); // Adjust threshold as needed
+  }, { 
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  });
 
-  document.querySelectorAll('.animate-on-scroll').forEach(element => {
-    observer.observe(element);
+  document.querySelectorAll('.animate-on-scroll').forEach(el => {
+    scrollObserver.observe(el);
   });
 });
-</script>
-
-
-<script>
-const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    });
-
-    document.querySelectorAll('.animate-on-scroll').forEach(el => {
-      observer.observe(el);
-    });
-</script>
-
-
-<script>
-// Intersection Observer for scroll animations
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('active');
-      // Optional: Unobserve after animation triggers
-      // observer.unobserve(entry.target);
-    }
-  });
-}, {
-  threshold: 0.1,
-  rootMargin: '0px 0px -50px 0px'
-});
-
-// Observe all elements with animate-on-scroll class
-document.querySelectorAll('.animate-on-scroll').forEach(el => {
-  observer.observe(el);
-});
-</script>
-
-
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-<script>
-  (function () {
-    emailjs.init("AdzdjQ8_16IJENrxG"); // Replace with your actual EmailJS Public Key
-  })();
-
-  function sendEmail(event) {
-    event.preventDefault(); // Prevent form from submitting the traditional way
-
-    emailjs.sendForm("service_p3ixm6k", "template_kt1xpni", "#contactForm")
-      .then(function () {
-        document.getElementById("responseMessage").innerText = "✅ Message sent successfully!";
-        document.getElementById("responseMessage").style.color = "lightgreen";
-        setTimeout(() => {
-          location.reload(); // Refresh the page after 2 seconds
-        }, 2000);
-      }, function (error) {
-        console.error("EmailJS Error:", error);
-        document.getElementById("responseMessage").innerText = "❌ Failed to send. Please try again.";
-        document.getElementById("responseMessage").style.color = "red";
-      });
-  }
 </script>
 
 

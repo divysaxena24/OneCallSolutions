@@ -85,6 +85,7 @@
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -316,12 +317,10 @@ a:hover {
   width: 80%;
   max-width: 600px;
   height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(90, 125, 255, 0.5) 50%,
-    transparent 100%
-  );
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(90, 125, 255, 0.5) 50%,
+      transparent 100%);
 }
 
 .footer-content {
@@ -519,7 +518,7 @@ a:hover {
 }
 
 
-a:hover{
+a:hover {
   text-decoration: none;
 }
 
@@ -584,10 +583,10 @@ a:hover{
   font-family: 'Poppins', sans-serif;
 }
 
-.form-group input:focus + label,
-.form-group input:not(:placeholder-shown) + label,
-.form-group textarea:focus + label,
-.form-group textarea:not(:placeholder-shown) + label {
+.form-group input:focus+label,
+.form-group input:not(:placeholder-shown)+label,
+.form-group textarea:focus+label,
+.form-group textarea:not(:placeholder-shown)+label {
   top: -10px;
   left: 12px;
   font-size: 0.75rem;
@@ -623,7 +622,8 @@ a:hover{
   text-align: center;
   font-family: 'Poppins', sans-serif;
   font-size: 0.95rem;
-  color: #4ade80; /* soft green for success */
+  color: #4ade80;
+  /* soft green for success */
 }
 
 /* Form validation styles */
@@ -656,8 +656,8 @@ a:hover{
   display: block;
 }
 
-.form-group input.is-invalid ~ label,
-.form-group textarea.is-invalid ~ label {
+.form-group input.is-invalid~label,
+.form-group textarea.is-invalid~label {
   color: #dc3545 !important;
 }
 
@@ -666,4 +666,56 @@ a:hover{
 .form-control.is-invalid {
   background-image: none !important;
   padding-right: 0.75rem !important;
+}
+
+/* OTP Section Styling */
+#otpSection {
+  background: rgba(59, 130, 246, 0.05);
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 25px;
+  border: 1px dashed rgba(59, 130, 246, 0.3);
+  animation: slideDown 0.4s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#sendOtpBtn,
+#verifyOtpBtn {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+#sendOtpBtn:not(:disabled):hover {
+  background-color: rgba(59, 130, 246, 0.1);
+  border-color: #60a5fa;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed !important;
+  background: #444 !important;
+  border-color: #555 !important;
+}
+
+#otpMessage {
+  font-weight: 500;
+  margin-top: 5px;
+}
+
+/* Ensure gap works for older browsers if needed */
+.gap-2 {
+  gap: 0.5rem;
 }

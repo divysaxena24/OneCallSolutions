@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Colors - Obsidian Cyber Palette */
+  --bg-deep: hsl(230, 25%, 2%);
+  --bg-surface: hsl(230, 25%, 4%);
+  --bg-elevated: hsl(230, 25%, 7%);
+
+  --accent-primary: hsl(250, 100%, 65%);
+  /* Cyber Purple */
+  --accent-secondary: hsl(200, 100%, 50%);
+  /* Electric Blue */
+  --accent-emerald: hsl(155, 100%, 50%);
+  /* Neon Emerald */
+  --accent-glow: hsla(250, 100%, 65%, 0.35);
+
+  --text-main: hsl(0, 0%, 98%);
+  --text-muted: hsl(230, 15%, 75%);
+  --text-dim: hsl(230, 15%, 55%);
+
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.07);
+  --glass-blur: 16px;
+
+  --gradient-cyber: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+  --gradient-surface: linear-gradient(180deg, var(--bg-surface) 0%, var(--bg-deep) 100%);
+
+  /* Spacing Scale */
+  --space-xs: clamp(0.25rem, 0.5vw, 0.5rem);
+  --space-sm: clamp(0.5rem, 1vw, 1rem);
+  --space-md: clamp(1rem, 2vw, 2rem);
+  --space-lg: clamp(2rem, 4vw, 4rem);
+  --space-xl: clamp(4rem, 8vw, 8rem);
+
+  /* Typography Scale */
+  --font-xs: clamp(0.7rem, 0.8vw, 0.8rem);
+  --font-sm: clamp(0.85rem, 0.9vw, 0.95rem);
+  --font-base: clamp(1rem, 1.1vw, 1.1rem);
+  --font-md: clamp(1.2rem, 1.5vw, 1.5rem);
+  --font-lg: clamp(2rem, 3.5vw, 3.5rem);
+  --font-xl: clamp(3rem, 6vw, 6rem);
+
+  /* Transitions */
+  --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-deep);
+  color: var(--text-main);
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+.brand-font {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+/* Global Utilities */
+.saas-glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: 1.5rem;
+  transition: var(--transition-smooth);
+}
+
+.saas-glass:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--accent-primary);
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), 0 0 20px var(--accent-glow);
+}
+
+.text-gradient {
+  background: var(--gradient-cyber);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.glow-btn {
+  background: var(--gradient-cyber);
+  color: #fff;
+  border: none;
+  padding: 0.9rem 2.2rem;
+  border-radius: 50px;
+  font-weight: 700;
+  transition: var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+
+.glow-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 25px var(--accent-glow);
+}
+
+/* Starfield Background Enhancement */
+.starfield {
+  position: relative;
+  background: var(--bg-deep);
+  min-height: 100vh;
+}
+
+.starfield::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(circle at 15% 15%, hsla(250, 100%, 65%, 0.04) 0%, transparent 40%),
+    radial-gradient(circle at 85% 85%, hsla(200, 100%, 50%, 0.04) 0%, transparent 40%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* AOS Customizations */
+[data-aos] {
+  transition-duration: 800ms !important;
+}
