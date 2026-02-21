@@ -31,7 +31,7 @@
 
 ## 🌐 Live Preview
 
-🔗 GitHub Pages: [https://divysaxena24.github.io/OneCallSolutions/](https://divysaxena24.github.io/OneCallSolutions/)  
+🔗 GitHub Pages: [https://onecallsolutions.in/](https://onecallsolutions.in/)  
 
 ---
 
